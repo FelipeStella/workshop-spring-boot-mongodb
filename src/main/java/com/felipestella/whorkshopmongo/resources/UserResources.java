@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.felipestella.whorkshopmongo.domain.Post;
 import com.felipestella.whorkshopmongo.domain.User;
 import com.felipestella.whorkshopmongo.dto.UserDto;
 import com.felipestella.whorkshopmongo.services.UserService;
@@ -59,6 +60,12 @@ public class UserResources {
 		User updateDataUser = service.fromDto(objDto);
 		updateDataUser = service.update(id, updateDataUser);
 		return ResponseEntity.ok().body(new UserDto(updateDataUser));
+	}
+	
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+		User user = service.findById(id);
+		return ResponseEntity.ok().body(user.getListPost());
 	}
 	
 }
