@@ -1,12 +1,15 @@
 package com.felipestella.whorkshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.felipestella.whorkshopmongo.dto.AuthorDto;
+import com.felipestella.whorkshopmongo.dto.ComentsDto;
 
 @Document
 public class Post implements Serializable{
@@ -20,6 +23,8 @@ public class Post implements Serializable{
 	private String body;
 	
 	private AuthorDto author;
+	
+	private List<ComentsDto> listComents = new ArrayList<>();
 	
 	public Post() {
 	}
@@ -72,6 +77,14 @@ public class Post implements Serializable{
 	public void setAuthor(AuthorDto author) {
 		this.author = author;
 	}
+	
+	public List<ComentsDto> getListComents() {
+		return listComents;
+	}
+
+	public void setListComents(List<ComentsDto> listComents) {
+		this.listComents = listComents;
+	}
 
 	@Override
 	public int hashCode() {
@@ -97,8 +110,6 @@ public class Post implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 	
 	
 }
