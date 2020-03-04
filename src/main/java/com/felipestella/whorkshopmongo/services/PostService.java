@@ -1,5 +1,6 @@
 package com.felipestella.whorkshopmongo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class PostService {
 		Optional<Post> post = reposit.findById(id);
 		return post.orElseThrow(() -> new ObjectNotFoundException("Comando não encontrado"));
 		
+	}
+	
+	public List<Post> findByTitle(String text){
+		return reposit.findByTitleContainingIgnoreCase(text);
 	}
 	
 }
