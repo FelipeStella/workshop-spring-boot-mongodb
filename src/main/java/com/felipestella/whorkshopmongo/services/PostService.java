@@ -1,5 +1,6 @@
 package com.felipestella.whorkshopmongo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,11 @@ public class PostService {
 	
 	public List<Post> findByTitle(String text){
 		return reposit.searchTitle(text);
+	}
+	
+	public List<Post> fullSearch(String text, Date initialDate, Date finalDate){
+		finalDate = new Date(finalDate.getTime() + 24 * 60 * 60 *1000);
+		return reposit.fullSearch(text, initialDate, finalDate);
 	}
 	
 }

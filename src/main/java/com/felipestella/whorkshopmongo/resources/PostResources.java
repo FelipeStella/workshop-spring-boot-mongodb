@@ -1,5 +1,6 @@
 package com.felipestella.whorkshopmongo.resources;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,19 @@ public class PostResources {
 	public ResponseEntity<List<Post>> findPostsByTitle(@RequestParam(value="txt", defaultValue = "") String text){
 		text = URL.decodeParam(text);
 		List<Post> list = service.findByTitle(text);
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value="/fullsearch")
+	public ResponseEntity<List<Post>> fullSearch(
+			@RequestParam(value="txt", defaultValue = "") String text,
+			@RequestParam(value="initialDate", defaultValue = "") String initialDate,
+			@RequestParam(value="finalDate", defaultValue = "") String finalDate
+			){
+		text = URL.decodeParam(text);
+		Date minDate = URL.convertDate(initialDate, new Date(0L));
+		Date maxDate = URL.convertDate(finalDate, new Date());
+		List<Post> list = service.fullSearch(text, minDate, maxDate);
 		return ResponseEntity.ok().body(list);
 	}
 

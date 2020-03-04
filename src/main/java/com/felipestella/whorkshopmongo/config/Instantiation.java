@@ -26,7 +26,7 @@ public class Instantiation implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		repositUser.deleteAll();
 		repositPost.deleteAll();
